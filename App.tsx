@@ -16,6 +16,9 @@ const App = () => {
   const [inc, setInc] = React.useState(0);
   const [codee, setCodee] = React.useState('');
   const [joinUsers, setJoinUsers] = React.useState('');
+  const [sessionId, setSessionId] = React.useState('');
+  const [agentId, setAgentId] = React.useState('');
+
 
   const start = () => {
     CobrowseIO.start();
@@ -24,6 +27,7 @@ const App = () => {
   const createSession = async () => {
     const session: any = await CobrowseIO.createSession();
     console.log('starting to get session code', session, session.code);
+    setSessionId(session.id);
     setCodee(session.code);
   };
 
@@ -60,6 +64,19 @@ const App = () => {
     };
   };
 
+  const joinById = async () => {
+    try {
+      if (sessionId.length > 5) {
+        const id = await CobrowseIO.getSession(sessionId);
+        console.log('getting Session ==> ', id);
+        setSessionId('');
+        return id;
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
+
   const joinSession = async () => {
     if (joinUsers.length === 6) {
       const getS = await CobrowseIO.getSession(joinUsers);
@@ -80,11 +97,14 @@ const App = () => {
         <Button title="count" onPress={() => setInc(prev => prev + 1)} />
         <View style={{marginTop: 30}}>
           <Text style={{color: '#fff'}}>{codee}</Text>
+          <Text style={{color: '#fff'}}>{sessionId}</Text>
+
         </View>
         <View style={{marginTop: 30}}>
           <Button title="Create session" onPress={() => createSession()} />
           <Button title="end session" onPress={() => endSession()} />
           <Button title="join session" onPress={() => joinSession()} />
+          <Button title="join session by id" onPress={() => joinById()} />
           {/* for making remote-control */}
           <Button title="remote" onPress={() => makeRemote()} />
         </View>
@@ -99,14 +119,35 @@ const App = () => {
           onChangeText={e => setJoinUsers(e)}
           placeholder="write code"
         />
+           <TextInput
+          style={{
+            marginTop: 10,
+            borderColor: 'green',
+            height: '40',
+            borderWidth: 1,
+          }}
+          value={sessionId}
+          onChangeText={e => setSessionId(e)}
+          placeholder="join by session id"
+        />
+        <TextInput
+          style={{
+            marginTop: 10,
+            borderColor: 'green',
+            height: '40',
+            borderWidth: 1,
+          }}
+          value={agentId}
+          onChangeText={e => setAgentId(e)}
+          placeholder="agent id for co browse"
+        />
       </View>
       <View style={{borderWidth: 1, borderColor: 'red', flex: 1, height: 100}}>
-        <Webview />
+        <Webview url={agentId} />
         {/* <CobrowseView /> */}
       </View>
     </>
   );
 };
-
 
 export default App;
