@@ -1,9 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import {Alert, Text, TextInput, View} from 'react-native';
 import React from 'react';
-import CobrowseIO from 'cobrowse-sdk-react-native';
+import CobrowseIO, {CobrowseView} from 'cobrowse-sdk-react-native';
 import {Button} from 'react-native';
 import {CobrowseAccessibilityService} from 'cobrowse-sdk-react-native';
+import Webview from './Webview';
 
 // CobrowseAccessibilityService.showSetup('')
 
@@ -99,8 +100,13 @@ const App = () => {
           placeholder="write code"
         />
       </View>
+      <View style={{borderWidth: 1, borderColor: 'red', flex: 1, height: 100}}>
+        <Webview />
+        {/* <CobrowseView /> */}
+      </View>
     </>
   );
 };
+
 
 export default App;
