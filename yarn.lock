@@ -1885,13 +1885,6 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.11.tgz#2596fb352ee96a1379c657734d4b913a613ad563"
   integrity sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==
 
-"@types/react-native@^0.70.6":
-  version "0.70.19"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.70.19.tgz#b4e651dcf7f49c69ff3a4c3072584cad93155582"
-  integrity sha512-c6WbyCgWTBgKKMESj/8b4w+zWcZSsCforson7UdXtXMecG3MxCinYi6ihhrHVPyUrVzORsvEzK8zg32z4pK6Sg==
-  dependencies:
-    "@types/react" "*"
-
 "@types/react-test-renderer@^18.0.0":
   version "18.0.7"
   resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-18.0.7.tgz#2cfe657adb3688cdf543995eceb2e062b5a68728"
@@ -2591,16 +2584,6 @@ co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
   integrity sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==
-
-cobrowse-sdk-react-native@^2.18.1:
-  version "2.18.1"
-  resolved "https://registry.yarnpkg.com/cobrowse-sdk-react-native/-/cobrowse-sdk-react-native-2.18.1.tgz#97c0965c4021848ef2018bf7a8195d670c6335e2"
-  integrity sha512-C2KDU4F5NvebUtqq32fLOCG7mmhfYcy37fceyn6UE9J6AY0ERH+lzgVKq9xpcCfux592k2WrEI010TFP2A28DQ==
-  dependencies:
-    lodash "^4.17.21"
-  optionalDependencies:
-    "@types/react" "^18.0.24"
-    "@types/react-native" "^0.70.6"
 
 collect-v8-coverage@^1.0.0:
   version "1.0.2"
