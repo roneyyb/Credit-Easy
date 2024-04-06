@@ -23,7 +23,7 @@ const App = () => {
 
     const [touch, setTouch] = React.useState({});
 
-    const interval = React.useRef(null);
+
 
     const captureScreen = async () => {
 
@@ -54,144 +54,31 @@ const App = () => {
 
     const simulateTap = (x, y) => {
 
-        // const element = document.elementFromPoint(x, y);
-        // console.log(element, "element")
-        // if (element.type === 'text') {
-        //     element.focus();
-        // } else {
-        //     const event = new MouseEvent('click', {
-        //         bubbles: true,
-        //         cancelable: true,
-        //         clientX: x,
-        //         clientY: y
-        //     });
-        //     element.focus();
+
+
+        //     const script = `var element = document.elementFromPoint(${x}, ${y});
+        //     window.ReactNativeWebView.postMessage(JSON.stringify({
+        //         type: 'log',
+        //         message: element
+        //     }));
+
+        //     if (element && element.tagName === 'INPUT') {
+
+        //         element.focus();
+        //     } else {
+
+        //         const event = new MouseEvent('click', {
+        //             bubbles: true,
+        //             cancelable: true,
+        //             clientX: ${x},
+        //             clientY: ${y}
+        //                 });
         //     element.dispatchEvent(event);
         // }
-        // let script = `
-        //     function simulateTap(x, y) {
-        //         console.log('sdff')
-        //     var elements = document.querySelectorAll('input[type="text"]');
-        //     var closestElement = null;
-        //     var minDistance = Number.MAX_SAFE_INTEGER;
+        //     `;
 
-        //     elements.forEach(function (element) {
-        //         var rect = element.getBoundingClientRect();
-        //         var elementX = rect.left + (rect.right - rect.left) / 2;
-        //         var elementY = rect.top + (rect.bottom - rect.top) / 2;
-        //         var distance = Math.sqrt(Math.pow(x - elementX, 2) + Math.pow(y - elementY, 2));
-
-        //         if (distance < minDistance) {
-        //             closestElement = element;
-        //             minDistance = distance;
-        //         }
-        //     });
-
-        //     if (closestElement) {
-        //         console.log('Found closest element:', closestElement);
-        //         closestElement.focus();
-        //     } else {
-        //         console.log('No element found at coordinates:', x, y);
-        //     }
-        // }
-        // simulateTap(${x}, ${y});
-        //   `;
-
-        //     const script = `
-        //   var elements = document.querySelectorAll('input[type="text"]');
-        //   var closestElement = null;
-        //   var minDistance = Number.MAX_SAFE_INTEGER;
-
-        //   elements.forEach(function(element) {
-        //     var rect = element.getBoundingClientRect();
-        //     var elementX = rect.left + (rect.right - rect.left) / 2;
-        //     var elementY = rect.top + (rect.bottom - rect.top) / 2;
-        //     var distance = Math.sqrt(Math.pow(${x} - elementX, 2) + Math.pow(${y} - elementY, 2));
-
-        //     if (distance < minDistance) {
-        //       closestElement = element;
-        //       minDistance = distance;
-        //     }
-        //   });
-
-        //   if (closestElement) {
-        //     closestElement.focus();
-        //   }
-        // `;
-
-
-        //         const script = `
-        //   var element = document.querySelector('input[type="text"]');
-        //   console.log(element,"element)
-        //   if (element) {
-        //     element.focus();
-        //   }
-        // `;
-
-        // console.log(script, "sc")
-        // let script = `var input = document.querySelector('input[type=text]');
-        // if (input) {
-        //   var rect = input.getBoundingClientRect();
-        //   var x = rect.left + (rect.right - rect.left) / 2;
-        //   var y = rect.top + (rect.bottom - rect.top) / 2;
-        //   var element = document.elementFromPoint(x, y);
-        //   if (element) {
-        //     element.focus();
-        //   }
-        // }`
-
-        const script = `
-          var element = document.elementFromPoint(${x}, ${y});
-           window.ReactNativeWebView.postMessage(JSON.stringify({
-        type: 'log',
-        message: element
-      }));
-     
-          if (element && element.tagName === 'INPUT') {
-          
-            element.focus();
-          } else {
-            
-                     const event = new MouseEvent('click', {
-                      bubbles: true,
-                      cancelable: true,
-                      clientX:${x},
-                      clientY:  ${y}
-                    });
-                    element.dispatchEvent(event);
-          }
-
-        `;
-
-        //     const script = `
-        //   console.log('Starting selection process at coordinates:', ${x}, ${y});
-
-        //  var elements = document.querySelector('input[type="text"]');
-        //   console.log('Found', elements.length, 'text input elements');
-
-        //   var closestElement = null;
-        //   var minDistance = Number.MAX_SAFE_INTEGER;
-
-        //    window.ReactNativeWebView.postMessage(JSON.stringify({
-        //     type: 'log',
-        //     message: elements
-        //   }));
-
-
-
-
-        //   // Send console log messages back to React Native
-        //   window.ReactNativeWebView.postMessage(JSON.stringify({
-        //     type: 'log',
-        //     message: 'Selection process completed'
-        //   }));
-        // `;
-        console.log("siii", y, ((y * (height - 40)) + 40), lastIndx, "asldtt")
-
-        //  console.log(x, ((y * viewHeight) + 40), ((y * viewHeight) + 40) / height)
         TouchSimulator.simulateTouch(x, ((y * (height - 40)) + 40) / height);
-        // viewRef.current.injectJavaScript(script);
-        // captureScreen()
+
     };
 
     const simulateScroll = (deltaY) => {
