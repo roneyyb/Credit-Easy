@@ -14,7 +14,8 @@
     "react-native": "0.72.3",
     "react-native-fs": "^2.20.0",
     "react-native-view-shot": "^3.8.0",
-    "react-native-webview": "^13.8.4"
+    "react-native-webview": "^13.8.4",
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
