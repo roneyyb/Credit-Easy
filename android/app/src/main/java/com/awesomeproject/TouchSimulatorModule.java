@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,12 +24,13 @@ import java.util.Random;
 
 public class TouchSimulatorModule extends ReactContextBaseJavaModule {
     private final ReactApplicationContext reactContext;
-
+    private Instrumentation mInstrumentation;
     private Activity activity;
     public TouchSimulatorModule(ReactApplicationContext reactContext) {
         super(reactContext);
 
         this.reactContext = reactContext;
+        this.mInstrumentation = new Instrumentation();
 
     }
 
@@ -37,10 +39,12 @@ public class TouchSimulatorModule extends ReactContextBaseJavaModule {
         return "TouchSimulator";
     }
 
+
+
     @ReactMethod
-    public void  simulateTouch(float x, float y) {
+    public void simulateTouch(float x, float y,float statusbarHeight) {
         Log.d("simmulate",y+ " " +x);
-        Instrumentation instrumentation = new Instrumentation();
+
         WindowManager windowManager = (WindowManager)  this.reactContext.getSystemService(Context.WINDOW_SERVICE); // Alternative way to get WindowManager
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
@@ -52,7 +56,7 @@ public class TouchSimulatorModule extends ReactContextBaseJavaModule {
         Log.d("MyActivity", "Screen size: " + width + "x" + height);
          Log.d("MyActivity", x*width + "x" + y*height);
 
-         float totalHeight= 60+ y*height;
+         float totalHeight= statusbarHeight+ y*height;
         Log.d("MyActivity", ""+totalHeight);
         // // Convert x and y to screen coordinates
         // float xRatio = (float) x / 1000; // Assuming x is in the range 0-1000
@@ -66,12 +70,25 @@ public class TouchSimulatorModule extends ReactContextBaseJavaModule {
         float offset = 5.0f;
         MotionEvent event = MotionEvent.obtain(
                 downTime, eventTime, MotionEvent.ACTION_DOWN, x* width+offset, totalHeight+offset , 0);
-        instrumentation.sendPointerSync(event);
+        this.mInstrumentation.sendPointerSync(event);
 
         eventTime = SystemClock.uptimeMillis();
         event = MotionEvent.obtain(
                 downTime, eventTime, MotionEvent.ACTION_UP, x* width+offset, totalHeight+offset, 0);
-        instrumentation.sendPointerSync(event);
+        this.mInstrumentation.sendPointerSync(event);
+    }
+
+    @ReactMethod
+    public void triggerKeyEvent(int keyCode) {
+       long eventTime = SystemClock.uptimeMillis();
+        this.mInstrumentation.sendKeyDownUpSync(keyCode);
+    }
+
+    // ... rest of your activity code
+    @ReactMethod
+    public void simulateKeyPress(View view) {
+        // Example: Simulate pressing the "ENTER" key
+        this.triggerKeyEvent(KeyEvent.KEYCODE_ENTER);
     }
 
     @ReactMethod
